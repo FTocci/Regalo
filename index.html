@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Prova il tuo sapere</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+        .option {
+            margin: 5px 0;
+        }
+        #results {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Riuscirà Anna ad ottenere il suo regalo??</h1>
+        <div id="question1" class="question">
+            <b>Domanda 1:</b> Qual è la capitale dell'Italia?
+        </div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q1" value="Roma"> Roma</label>
+            <label class="option"><input type="radio" name="q1" value="Parigi"> Parigi</label>
+            <label class="option"><input type="radio" name="q1" value="Berlino"> Berlino</label>
+        </div>
+		<br>
+        <div id="question2" class="question">
+            <b>Domanda 2:</b> Quale pianeta è più vicino al Sole?
+        </div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q2" value="Terra"> Terra</label>
+            <label class="option"><input type="radio" name="q2" value="Marte"> Marte</label>
+            <label class="option"><input type="radio" name="q2" value="Venere"> Venere</label>
+        </div>
+		<br>
+        <div id="question3" class="question">
+            <b>Domanda 3:</b> Quando ha vinto il primo mondiale l'Italia?
+        </div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q3" value="12"> 1930</label>
+            <label class="option"><input type="radio" name="q3" value="24"> 1934</label>
+            <label class="option"><input type="radio" name="q3" value="36"> 1952</label>
+        </div>
+		<br>
+        <div id="question4" class="question">
+            <b>Domanda 4:</b> Chi scrisse "Romeo e Giulietta"?
+        </div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q4" value="Shakespeare"> Shakespeare</label>
+            <label class="option"><input type="radio" name="q4" value="Hemingway"> Hemingway</label>
+            <label class="option"><input type="radio" name="q4" value="Tolkien"> Tolkien</label>
+        </div>
+		<br>
+        <div id="question5" class="question">
+            <b>Domanda 5:</b> Qual è l'elemento chimico con simbolo "H"?
+        </div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q5" value="Idrogeno"> Idrogeno</label>
+            <label class="option"><input type="radio" name="q5" value="Ossigeno"> Ossigeno</label>
+            <label class="option"><input type="radio" name="q5" value="Azoto"> Azoto</label>
+        </div>
+		<br>
+        <button id="submit" style="background-color: #007BFF; color: #fff; border-radius: 5px; padding: 10px 20px; font-size: 18px;" onclick="showResults()">Vai ai risultati</button>
+        <div id="results">
+            <h2>Risultati:</h2>
+            <p id="score"></p>
+        </div>
+    </div>
+
+ <script>
+    function showResults() {
+        const score = calculateScore();
+        const resultText = `Hai ottenuto ${score} punti su 5.`;
+
+        // Reindirizzamento alla pagina "premio.html"
+        window.location.href = "premio.html?score=" + score + "&result=" + encodeURIComponent(resultText);
+    }
+
+    function calculateScore() {
+        let score = 0;
+        const answers = {
+            q1: 'Roma',
+            q2: 'Mercurio',
+            q3: '24',
+            q4: 'Shakespeare',
+            q5: 'Idrogeno'
+        };
+
+        for (let i = 1; i <= 5; i++) {
+            const questionName = `q${i}`;
+            const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+
+            if (selectedOption && selectedOption.value === answers[questionName]) {
+                score++;
+            }
+        }
+
+        return score;
+    }
+</script>
+
+</body>
+</html>
